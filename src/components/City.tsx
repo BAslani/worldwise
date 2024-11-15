@@ -1,23 +1,28 @@
-import styles from "./City.module.css";
+import styles from './City.module.css'
 
-const formatDate = (date) =>
-  new Intl.DateTimeFormat("en", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    weekday: "long",
-  }).format(new Date(date));
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat('en', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    weekday: 'long',
+  }).format(new Date(date))
 
 function City() {
   // TEMP DATA
-  const currentCity = {
-    cityName: "Lisbon",
-    emoji: "🇵🇹",
-    date: "2027-10-31T15:59:59.138Z",
-    notes: "My favorite city so far!",
-  };
+  const currentCity: {
+    cityName: string
+    emoji: string
+    date: Date
+    notes: string
+  } = {
+    cityName: 'Lisbon',
+    emoji: '🇵🇹',
+    date: '2027-10-31T15:59:59.138Z' as unknown as Date,
+    notes: 'My favorite city so far!',
+  }
 
-  const { cityName, emoji, date, notes } = currentCity;
+  const { cityName, emoji, date, notes } = currentCity
 
   return (
     <div className={styles.city}>
@@ -44,18 +49,16 @@ function City() {
         <h6>Learn more</h6>
         <a
           href={`https://en.wikipedia.org/wiki/${cityName}`}
-          target="_blank"
-          rel="noreferrer"
+          target='_blank'
+          rel='noreferrer'
         >
           Check out {cityName} on Wikipedia &rarr;
         </a>
       </div>
 
-      <div>
-        <ButtonBack />
-      </div>
+      <div>{/* <ButtonBack /> */}</div>
     </div>
-  );
+  )
 }
 
-export default City;
+export default City
