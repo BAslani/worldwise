@@ -6,6 +6,8 @@ import { useCities } from '../contexts/CitiesContexts'
 import ChangeCenter from './ChangeCenter'
 import { useSearchParams } from 'react-router-dom'
 import DetectClick from './DetectClick'
+import { useGeolocation } from '../hooks/useGeolocation'
+import Button from './Button'
 
 export default function Map() {
   // const navigate = useNavigate()
@@ -13,6 +15,11 @@ export default function Map() {
   const mapLat = Number(searchParams.get('lat'))
   const mapLng = Number(searchParams.get('lng'))
   const { cities } = useCities()
+  const {
+    isLoading: isLoadingPosition,
+    position: geolocationPosition,
+    getPosition,
+  } = useGeolocation()
 
   const [position, setPosition] = useState<LatLngExpression>([40, 0])
 
@@ -22,8 +29,19 @@ export default function Map() {
     }
   }, [mapLat, mapLng])
 
+  useEffect(() => {
+    if (geolocationPosition) {
+      setPosition([geolocationPosition.lat, geolocationPosition.lng])
+    }
+  }, [geolocationPosition])
+
   return (
     <div className={styles.mapContainer}>
+      {!geolocationPosition && (
+        <Button type='position' onClick={getPosition}>
+          {isLoadingPosition ? 'Loading...' : 'Use your position'}
+        </Button>
+      )}
       <MapContainer
         className={styles.map}
         center={position}
