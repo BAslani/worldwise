@@ -1,24 +1,33 @@
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import styles from './Map.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { LatLngExpression } from 'leaflet'
 import { useCities } from '../contexts/CitiesContexts'
+import ChangeCenter from './ChangeCenter'
+import { useSearchParams } from 'react-router-dom'
+import DetectClick from './DetectClick'
 
 export default function Map() {
   // const navigate = useNavigate()
-  // const [searchParams] = useSearchParams()
-  // const lat = searchParams.get('lat')
-  // const lng = searchParams.get('lng')
+  const [searchParams] = useSearchParams()
+  const mapLat = Number(searchParams.get('lat'))
+  const mapLng = Number(searchParams.get('lng'))
   const { cities } = useCities()
 
   const [position, setPosition] = useState<LatLngExpression>([40, 0])
+
+  useEffect(() => {
+    if (mapLat && mapLng) {
+      setPosition([mapLat, mapLng])
+    }
+  }, [mapLat, mapLng])
 
   return (
     <div className={styles.mapContainer}>
       <MapContainer
         className={styles.map}
         center={position}
-        zoom={10}
+        zoom={8}
         scrollWheelZoom={true}
       >
         <TileLayer
@@ -38,6 +47,8 @@ export default function Map() {
             </Marker>
           )
         })}
+        <ChangeCenter position={position} />
+        <DetectClick />
       </MapContainer>
     </div>
   )
