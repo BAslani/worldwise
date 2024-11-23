@@ -14,6 +14,7 @@ type CitiesContextType = {
   isLoading: boolean
   getCity: (id: string) => void
   createCity: (city: Omit<CityType, 'id'>) => Promise<void>
+  deleteCity: (id: string) => void
   currentCity: CityType
 }
 
@@ -24,6 +25,7 @@ const initialState = {
   createCity: () => {
     return Promise.resolve()
   },
+  deleteCity: () => {},
   currentCity: {
     cityName: '',
     country: '',
@@ -88,7 +90,21 @@ function CitiesProvider({ children }: { children: ReactNode }) {
       const data = await res.json()
       setCities((cities) => [...cities, data])
     } catch {
-      alert('There was an error loading data...')
+      alert('There was an error creating city...')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  async function deleteCity(id: string) {
+    try {
+      setIsLoading(true)
+      await fetch(`${BASE_URL}/cities/${id}`, {
+        method: 'DELETE',
+      })
+      setCities((cities) => cities.filter((city) => city.id !== id))
+    } catch {
+      alert('There was an error deleting city...')
     } finally {
       setIsLoading(false)
     }
@@ -102,6 +118,7 @@ function CitiesProvider({ children }: { children: ReactNode }) {
         currentCity,
         getCity,
         createCity,
+        deleteCity,
       }}
     >
       {children}

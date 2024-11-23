@@ -18,7 +18,12 @@ const formatDate = (date: Date) =>
 export default function CityItem({
   city: { cityName, emoji, date, id, position },
 }: Props) {
-  const { currentCity } = useCities()
+  const { currentCity, deleteCity } = useCities()
+
+  function handleDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault()
+    deleteCity(id)
+  }
   return (
     <li>
       <Link
@@ -30,7 +35,9 @@ export default function CityItem({
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>
         <time className={styles.date}>({formatDate(date)})</time>
-        <button className={styles.deleteBtn}>&times;</button>
+        <button className={styles.deleteBtn} onClick={handleDelete}>
+          &times;
+        </button>
       </Link>
     </li>
   )
