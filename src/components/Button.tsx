@@ -3,7 +3,7 @@ import styles from './Button.module.css'
 
 type Props = {
   children: ReactNode
-  onClick: (e: FormEvent) => void
+  onClick?: (e: FormEvent) => void
   type: 'primary' | 'back' | 'position'
 }
 

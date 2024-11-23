@@ -4,22 +4,20 @@ import { useEffect, useState } from 'react'
 import { LatLngExpression } from 'leaflet'
 import { useCities } from '../contexts/CitiesContexts'
 import ChangeCenter from './ChangeCenter'
-import { useSearchParams } from 'react-router-dom'
 import DetectClick from './DetectClick'
 import { useGeolocation } from '../hooks/useGeolocation'
 import Button from './Button'
+import { useUrlPosition } from '../hooks/useUrlPosition'
 
 export default function Map() {
-  // const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const mapLat = Number(searchParams.get('lat'))
-  const mapLng = Number(searchParams.get('lng'))
   const { cities } = useCities()
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
     getPosition,
   } = useGeolocation()
+
+  const [mapLat, mapLng] = useUrlPosition()
 
   const [position, setPosition] = useState<LatLngExpression>([40, 0])
 
