@@ -25,30 +25,6 @@
       "id": "17806751"
     },
     {
-      "cityName": "Barcelona",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2027-07-15T08:22:53.976Z",
-      "notes": "",
-      "position": {
-        "lat": 41.4,
-        "lng": 2.2
-      },
-      "id": "17806231"
-    },
-    {
-      "id": "862c",
-      "cityName": "Paris",
-      "country": "France",
-      "emoji": "FR",
-      "date": "2024-11-23T09:58:48.395Z",
-      "notes": "",
-      "position": {
-        "lat": 48.85387302426141,
-        "lng": 2.3620598491088356
-      }
-    },
-    {
       "id": "2fd8",
       "cityName": "London",
       "country": "United Kingdom of Great Britain and Northern Ireland (the)",
@@ -61,15 +37,15 @@
       }
     },
     {
-      "id": "4adc",
-      "cityName": "Milan",
-      "country": "Italy",
-      "emoji": "IT",
-      "date": "2024-11-23T10:22:48.887Z",
-      "notes": "",
+      "id": "ace8",
+      "cityName": "Paris",
+      "country": "France",
+      "emoji": "FR",
+      "date": "2024-11-24T09:07:02.042Z",
+      "notes": "I wanna go there",
       "position": {
-        "lat": 45.429243805424846,
-        "lng": 9.228123371915588
+        "lat": 48.8646517167118,
+        "lng": 2.3511605239171334
       }
     }
   ]
